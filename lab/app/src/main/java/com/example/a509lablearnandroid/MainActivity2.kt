@@ -41,7 +41,7 @@ fun Greeting2(name: String, modifier: Modifier = Modifier) {
     var inputText by remember { mutableStateOf("") }
     Column {
         Text(
-            text = "Hello $name! say = ........." ,
+            text = "Hello $name! say = " + inputText ,
             modifier = modifier
         )
         TextField(
