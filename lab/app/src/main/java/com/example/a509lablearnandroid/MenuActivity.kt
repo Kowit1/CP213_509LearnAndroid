@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.a509lablearnandroid.utils.SharedPreferencesUtil
 
 class MenuActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,11 @@ class MenuActivity : ComponentActivity() {
                     startActivity(Intent(this@MenuActivity, LifeCycleComposeActivity::class.java))
                 }) {
                     Text("LifeCycleComposeActivity")
+                }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, SharedPreferencesActivity::class.java))
+                }) {
+                    Text("SharedPreferencesUtil")
                 }
             }
         }
