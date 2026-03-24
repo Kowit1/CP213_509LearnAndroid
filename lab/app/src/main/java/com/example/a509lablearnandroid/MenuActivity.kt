@@ -45,6 +45,11 @@ class MenuActivity : ComponentActivity() {
                 }) {
                     Text("GalleryActivity")
                 }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, SensorActivity::class.java))
+                }) {
+                    Text("SensorActivity")
+                }
             }
         }
     }
