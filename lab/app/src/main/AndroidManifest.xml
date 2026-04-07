@@ -21,6 +21,36 @@
         android:theme="@style/Theme._509LabLearnAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".Part8Activity"
+            android:exported="false"
+            android:label="Adaptive Layouts"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
+            android:name=".Part7Activity"
+            android:exported="false"
+            android:label="Multi-Activity Transition"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
+            android:name=".Part7DetailActivity"
+            android:exported="false"
+            android:label="Detail Activity"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
+            android:name=".Part6Activity"
+            android:exported="false"
+            android:label="View Interoperability"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
+            android:name=".Part5Activity"
+            android:exported="false"
+            android:label="Side Effect Activity"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
+            android:name=".Part4Activity"
+            android:exported="false"
+            android:label="Advanced Gestures Activity"
+            android:theme="@style/Theme._509LabLearnAndroid" />
+        <activity
             android:name=".Part3Activity"
             android:exported="false"
             android:label="@string/title_activity_part3"
