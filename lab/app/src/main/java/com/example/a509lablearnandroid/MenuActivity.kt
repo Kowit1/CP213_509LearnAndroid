@@ -90,6 +90,26 @@ class MenuActivity : ComponentActivity() {
                 }) {
                     Text("Part8Activity")
                 }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, Part9Activity::class.java))
+                }) {
+                    Text("Part9Activity")
+                }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, Part10Activity::class.java))
+                }) {
+                    Text("Part10Activity")
+                }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, Part11Activity::class.java))
+                }) {
+                    Text("Part11Activity")
+                }
+                Button(onClick = {
+                    startActivity(Intent(this@MenuActivity, Part12Activity::class.java))
+                }) {
+                    Text("Part12Activity")
+                }
             }
         }
     }
