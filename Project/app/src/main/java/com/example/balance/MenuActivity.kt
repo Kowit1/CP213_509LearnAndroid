@@ -58,6 +58,11 @@ class MenuActivity : Activity() {
         startActivity(intent)
     }
 
+    fun openScoreboard() {
+        val intent = Intent(this, ScoreboardActivity::class.java)
+        startActivity(intent)
+    }
+
     // =========================================================
     // MenuView — Custom Canvas-drawn menu
     // =========================================================
@@ -73,6 +78,7 @@ class MenuActivity : Activity() {
 
         // Button rectangles
         private val startBtnRect = RectF()
+        private val scoreboardBtnRect = RectF()
         private val settingsBtnRect = RectF()
         private val backBtnRect = RectF()
 
@@ -158,10 +164,11 @@ class MenuActivity : Activity() {
             val btnW = 320f
             val btnH = 80f
             val centerX = sw / 2f
-            val startY = sh * 0.55f
+            val startY = sh * 0.50f
 
             startBtnRect.set(centerX - btnW / 2, startY, centerX + btnW / 2, startY + btnH)
-            settingsBtnRect.set(centerX - btnW / 2, startY + 120f, centerX + btnW / 2, startY + 120f + btnH)
+            scoreboardBtnRect.set(centerX - btnW / 2, startY + 110f, centerX + btnW / 2, startY + 110f + btnH)
+            settingsBtnRect.set(centerX - btnW / 2, startY + 220f, centerX + btnW / 2, startY + 220f + btnH)
 
             // Back button (for settings)
             backBtnRect.set(centerX - btnW / 2, sh * 0.82f, centerX + btnW / 2, sh * 0.82f + btnH)
@@ -303,11 +310,15 @@ class MenuActivity : Activity() {
             canvas.drawText("Stack · Balance · Survive", sw / 2f, titleY + 140f, subtitlePaint)
 
             // START GAME button
-            drawButton(canvas, startBtnRect, "▶  START GAME",
+            drawButton(canvas, startBtnRect, "START GAME",
                 Color.rgb(46, 204, 113), Color.rgb(39, 174, 96))
 
+            // SCOREBOARD button
+            drawButton(canvas, scoreboardBtnRect, "SCOREBOARD",
+                Color.rgb(241, 196, 15), Color.rgb(211, 166, 0))
+
             // SETTINGS button
-            drawButton(canvas, settingsBtnRect, "⚙  SETTINGS",
+            drawButton(canvas, settingsBtnRect, "SETTINGS",
                 Color.rgb(52, 152, 219), Color.rgb(41, 128, 185))
         }
 
@@ -429,6 +440,8 @@ class MenuActivity : Activity() {
                     } else {
                         if (startBtnRect.contains(x, y)) {
                             activity.startGame()
+                        } else if (scoreboardBtnRect.contains(x, y)) {
+                            activity.openScoreboard()
                         } else if (settingsBtnRect.contains(x, y)) {
                             showSettings = true
                         }

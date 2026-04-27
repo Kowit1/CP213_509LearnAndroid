@@ -35,6 +35,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Balance" />
 
+        <!-- Scoreboard screen (launched from menu) -->
+        <activity
+            android:name=".ScoreboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Balance" />
+
     </application>
 
 </manifest>

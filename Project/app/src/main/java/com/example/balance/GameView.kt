@@ -60,6 +60,7 @@ class GameView @JvmOverloads constructor(
     private var gameOver = false
     private var isCollapsePhase = false  // True while tower topple animation plays
     private var collapseDelayTimer = 0f  // Delay before showing game-over after collapse
+    private var scoreSaved = false       // Flag to avoid saving score multiple times
     private var eventText = ""
     private var cameraY = 0f           // Camera offset for scrolling up
     private var screenWidth = 0f
@@ -207,9 +208,10 @@ class GameView @JvmOverloads constructor(
             Shader.TileMode.CLAMP
         )
 
-        // Initialize input and audio, then start game
+        // Initialize input, audio, and score storage, then start game
         inputManager.initialize()
         audioManager.init()
+        ScoreRepository.init(context)
         startGame()
     }
 
@@ -229,6 +231,7 @@ class GameView @JvmOverloads constructor(
         gameOver = false
         isCollapsePhase = false
         collapseDelayTimer = 0f
+        scoreSaved = false
         tower.clear()
         eventSystem.reset()
         cameraY = 0f
@@ -255,6 +258,7 @@ class GameView @JvmOverloads constructor(
         gameOver = false
         isCollapsePhase = false
         collapseDelayTimer = 0f
+        scoreSaved = false
         tower.clear()
         eventSystem.reset()
         cameraY = 0f
@@ -402,6 +406,7 @@ class GameView @JvmOverloads constructor(
                 gameOver = true
                 audioManager.playSfxGameOver()
                 audioManager.pauseBGM()
+                saveScoreIfNeeded()
                 isCollapsePhase = false
             }
             return // Skip normal update during collapse
@@ -477,6 +482,7 @@ class GameView @JvmOverloads constructor(
                 gameOver = true
                 audioManager.playSfxGameOver()
                 audioManager.pauseBGM()
+                saveScoreIfNeeded()
                 return
             }
         }
@@ -487,6 +493,7 @@ class GameView @JvmOverloads constructor(
             gameOver = true
             audioManager.playSfxGameOver()
             audioManager.pauseBGM()
+            saveScoreIfNeeded()
             return
         }
 
@@ -495,6 +502,7 @@ class GameView @JvmOverloads constructor(
             gameOver = true
             audioManager.playSfxGameOver()
             audioManager.pauseBGM()
+            saveScoreIfNeeded()
             return
         }
 
@@ -781,7 +789,7 @@ class GameView @JvmOverloads constructor(
             textAlign = Paint.Align.CENTER
             setShadowLayer(4f, 0f, 0f, Color.BLACK)
         }
-        canvas.drawText("◀  BACK TO MENU", menuButtonGameOver.centerX(), menuButtonGameOver.centerY() + 14f, menuBtnTextPaint)
+        canvas.drawText("BACK TO MENU", menuButtonGameOver.centerX(), menuButtonGameOver.centerY() + 14f, menuBtnTextPaint)
     }
 
     // ===== Touch input handling =====
@@ -858,6 +866,21 @@ class GameView @JvmOverloads constructor(
         }
 
         return true
+    }
+
+    // ===== Score saving =====
+
+    /**
+     * Save the current score to the repository (once per game).
+     * Only saves if the player stacked at least 1 block.
+     */
+    private fun saveScoreIfNeeded() {
+        if (scoreSaved) return
+        scoreSaved = true
+        val finalScore = tower.score
+        if (finalScore > 0) {
+            ScoreRepository.saveScore("Player", finalScore)
+        }
     }
 
     // ===== Lifecycle =====
